@@ -1,0 +1,531 @@
+[
+  {
+    "slug": "saulx-les-chartreux",
+    "name": "Saulx-les-Chartreux",
+    "cp": "91160",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "5 300",
+    "distance": "0",
+    "lat": 48.6803,
+    "lng": 2.2767,
+    "insee": "91587",
+    "isMain": true,
+    "quartiers": [
+      "Centre-bourg",
+      "Le Plateau",
+      "Les Sources",
+      "La Vallée"
+    ],
+    "voisins": [
+      "longjumeau",
+      "chilly-mazarin",
+      "champlan",
+      "ballainvilliers",
+      "villebon-sur-yvette"
+    ]
+  },
+  {
+    "slug": "longjumeau",
+    "name": "Longjumeau",
+    "cp": "91160",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "22 000",
+    "distance": "1,5",
+    "lat": 48.6953,
+    "lng": 2.2942,
+    "insee": "91345",
+    "quartiers": [
+      "Centre-ville",
+      "Balizy",
+      "La Rocade",
+      "Gravigny",
+      "Les Coudraies"
+    ],
+    "voisins": [
+      "saulx-les-chartreux",
+      "chilly-mazarin",
+      "epinay-sur-orge",
+      "champlan",
+      "villebon-sur-yvette"
+    ]
+  },
+  {
+    "slug": "chilly-mazarin",
+    "name": "Chilly-Mazarin",
+    "cp": "91380",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "21 000",
+    "distance": "2",
+    "lat": 48.7028,
+    "lng": 2.3122,
+    "insee": "91161",
+    "quartiers": [
+      "Centre-ville",
+      "La Butte",
+      "Le Parc",
+      "Les Acacias"
+    ],
+    "voisins": [
+      "longjumeau",
+      "saulx-les-chartreux",
+      "wissous",
+      "massy",
+      "epinay-sur-orge"
+    ]
+  },
+  {
+    "slug": "massy",
+    "name": "Massy",
+    "cp": "91300",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "50 000",
+    "distance": "4",
+    "lat": 48.7308,
+    "lng": 2.2733,
+    "insee": "91377",
+    "quartiers": [
+      "Massy-Palaiseau",
+      "Massy-Vilmorin",
+      "Villaine",
+      "Massy-Verrières",
+      "Atlantis",
+      "Opéra"
+    ],
+    "voisins": [
+      "palaiseau",
+      "chilly-mazarin",
+      "verrieres-le-buisson",
+      "wissous",
+      "villebon-sur-yvette"
+    ]
+  },
+  {
+    "slug": "palaiseau",
+    "name": "Palaiseau",
+    "cp": "91120",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "33 000",
+    "distance": "5",
+    "lat": 48.7144,
+    "lng": 2.2453,
+    "insee": "91477",
+    "quartiers": [
+      "Centre-ville",
+      "Lozère",
+      "Polytechnique",
+      "Pileu",
+      "Larris",
+      "Les Garennes"
+    ],
+    "voisins": [
+      "massy",
+      "villebon-sur-yvette",
+      "orsay",
+      "igny",
+      "saulx-les-chartreux"
+    ]
+  },
+  {
+    "slug": "ballainvilliers",
+    "name": "Ballainvilliers",
+    "cp": "91160",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "4 200",
+    "distance": "1",
+    "lat": 48.6764,
+    "lng": 2.2906,
+    "insee": "91044",
+    "quartiers": [
+      "Centre-bourg",
+      "Le Clos des Vignes",
+      "Les Petits Champs"
+    ],
+    "voisins": [
+      "saulx-les-chartreux",
+      "longjumeau",
+      "champlan",
+      "epinay-sur-orge"
+    ]
+  },
+  {
+    "slug": "champlan",
+    "name": "Champlan",
+    "cp": "91160",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "2 800",
+    "distance": "2",
+    "lat": 48.7128,
+    "lng": 2.27,
+    "insee": "91136",
+    "quartiers": [
+      "Centre-bourg",
+      "Les Hauts de Champlan",
+      "La Plaine"
+    ],
+    "voisins": [
+      "saulx-les-chartreux",
+      "massy",
+      "wissous",
+      "villebon-sur-yvette",
+      "longjumeau"
+    ]
+  },
+  {
+    "slug": "villebon-sur-yvette",
+    "name": "Villebon-sur-Yvette",
+    "cp": "91140",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "10 500",
+    "distance": "3",
+    "lat": 48.7008,
+    "lng": 2.2381,
+    "insee": "91661",
+    "quartiers": [
+      "Centre-ville",
+      "Le Plessis",
+      "Courtaboeuf",
+      "La Plaine de Villebon"
+    ],
+    "voisins": [
+      "palaiseau",
+      "massy",
+      "champlan",
+      "saulx-les-chartreux",
+      "orsay"
+    ]
+  },
+  {
+    "slug": "wissous",
+    "name": "Wissous",
+    "cp": "91320",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "7 500",
+    "distance": "4",
+    "lat": 48.7322,
+    "lng": 2.3239,
+    "insee": "91689",
+    "quartiers": [
+      "Centre-bourg",
+      "Plaine de Montjean",
+      "Le Clos"
+    ],
+    "voisins": [
+      "chilly-mazarin",
+      "massy",
+      "champlan",
+      "fontenay-aux-roses"
+    ]
+  },
+  {
+    "slug": "epinay-sur-orge",
+    "name": "Épinay-sur-Orge",
+    "cp": "91360",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "11 000",
+    "distance": "4",
+    "lat": 48.6692,
+    "lng": 2.3236,
+    "insee": "91216",
+    "quartiers": [
+      "Centre-ville",
+      "Petit-Vaux",
+      "Mauregard",
+      "La Croix-Ronde"
+    ],
+    "voisins": [
+      "longjumeau",
+      "ballainvilliers",
+      "saulx-les-chartreux",
+      "chilly-mazarin"
+    ]
+  },
+  {
+    "slug": "igny",
+    "name": "Igny",
+    "cp": "91430",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "11 000",
+    "distance": "6",
+    "lat": 48.7461,
+    "lng": 2.2186,
+    "insee": "91312",
+    "quartiers": [
+      "Centre-ville",
+      "Les Ruchères",
+      "Gommonvilliers",
+      "La Ferme"
+    ],
+    "voisins": [
+      "palaiseau",
+      "bievres",
+      "verrieres-le-buisson",
+      "massy"
+    ]
+  },
+  {
+    "slug": "bievres",
+    "name": "Bièvres",
+    "cp": "91570",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "4 800",
+    "distance": "7",
+    "lat": 48.7558,
+    "lng": 2.2128,
+    "insee": "91064",
+    "quartiers": [
+      "Centre-bourg",
+      "Vauboyen",
+      "Les Roches"
+    ],
+    "voisins": [
+      "igny",
+      "verrieres-le-buisson",
+      "palaiseau",
+      "le-plessis-robinson"
+    ]
+  },
+  {
+    "slug": "orsay",
+    "name": "Orsay",
+    "cp": "91400",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "16 500",
+    "distance": "7",
+    "lat": 48.6997,
+    "lng": 2.1881,
+    "insee": "91471",
+    "quartiers": [
+      "Centre-ville",
+      "Mondétour",
+      "Le Guichet",
+      "Bures-Mondétour"
+    ],
+    "voisins": [
+      "palaiseau",
+      "les-ulis",
+      "villebon-sur-yvette"
+    ]
+  },
+  {
+    "slug": "les-ulis",
+    "name": "Les Ulis",
+    "cp": "91940",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "25 000",
+    "distance": "9",
+    "lat": 48.6814,
+    "lng": 2.1717,
+    "insee": "91692",
+    "quartiers": [
+      "Centre-ville",
+      "Bathes",
+      "Courdimanche",
+      "Bosquets",
+      "Templiers"
+    ],
+    "voisins": [
+      "orsay",
+      "villebon-sur-yvette",
+      "palaiseau"
+    ]
+  },
+  {
+    "slug": "verrieres-le-buisson",
+    "name": "Verrières-le-Buisson",
+    "cp": "91370",
+    "dept": "91",
+    "deptName": "Essonne",
+    "pop": "16 000",
+    "distance": "5",
+    "lat": 48.7508,
+    "lng": 2.2622,
+    "insee": "91645",
+    "quartiers": [
+      "Centre-ville",
+      "Le Bocage",
+      "La Vallée",
+      "Les Prés Hauts",
+      "Bois de Verrières"
+    ],
+    "voisins": [
+      "antony",
+      "massy",
+      "igny",
+      "bievres",
+      "le-plessis-robinson"
+    ]
+  },
+  {
+    "slug": "antony",
+    "name": "Antony",
+    "cp": "92160",
+    "dept": "92",
+    "deptName": "Hauts-de-Seine",
+    "pop": "63 000",
+    "distance": "6",
+    "lat": 48.7539,
+    "lng": 2.2972,
+    "insee": "92002",
+    "quartiers": [
+      "Centre-ville",
+      "Pajeaud",
+      "La Fontaine",
+      "Le Noyer Doré",
+      "Jean Zay",
+      "Les Baconnets",
+      "Velpeau"
+    ],
+    "voisins": [
+      "sceaux",
+      "verrieres-le-buisson",
+      "chatenay-malabry",
+      "fontenay-aux-roses",
+      "wissous",
+      "massy"
+    ]
+  },
+  {
+    "slug": "sceaux",
+    "name": "Sceaux",
+    "cp": "92330",
+    "dept": "92",
+    "deptName": "Hauts-de-Seine",
+    "pop": "20 000",
+    "distance": "7",
+    "lat": 48.7775,
+    "lng": 2.2944,
+    "insee": "92071",
+    "quartiers": [
+      "Centre-ville",
+      "Robinson",
+      "Penthièvre",
+      "Musiciens",
+      "Charaire",
+      "Blagis"
+    ],
+    "voisins": [
+      "antony",
+      "bourg-la-reine",
+      "fontenay-aux-roses",
+      "chatenay-malabry",
+      "le-plessis-robinson"
+    ]
+  },
+  {
+    "slug": "chatenay-malabry",
+    "name": "Châtenay-Malabry",
+    "cp": "92290",
+    "dept": "92",
+    "deptName": "Hauts-de-Seine",
+    "pop": "35 000",
+    "distance": "7",
+    "lat": 48.7708,
+    "lng": 2.2683,
+    "insee": "92019",
+    "quartiers": [
+      "Centre-ville",
+      "Vallée-aux-Loups",
+      "Cyrano",
+      "Butte Rouge",
+      "Mouille-Boeufs",
+      "Robinson"
+    ],
+    "voisins": [
+      "sceaux",
+      "le-plessis-robinson",
+      "antony",
+      "verrieres-le-buisson",
+      "fontenay-aux-roses"
+    ]
+  },
+  {
+    "slug": "le-plessis-robinson",
+    "name": "Le Plessis-Robinson",
+    "cp": "92350",
+    "dept": "92",
+    "deptName": "Hauts-de-Seine",
+    "pop": "30 000",
+    "distance": "8",
+    "lat": 48.7822,
+    "lng": 2.2625,
+    "insee": "92060",
+    "quartiers": [
+      "Cité-Jardins",
+      "Centre-ville",
+      "Pergola",
+      "Bois des Vallées",
+      "Hauts du Plessis"
+    ],
+    "voisins": [
+      "chatenay-malabry",
+      "sceaux",
+      "fontenay-aux-roses",
+      "verrieres-le-buisson",
+      "bievres"
+    ]
+  },
+  {
+    "slug": "bourg-la-reine",
+    "name": "Bourg-la-Reine",
+    "cp": "92340",
+    "dept": "92",
+    "deptName": "Hauts-de-Seine",
+    "pop": "21 000",
+    "distance": "9",
+    "lat": 48.7794,
+    "lng": 2.3186,
+    "insee": "92014",
+    "quartiers": [
+      "Centre-ville",
+      "Le Carrefour",
+      "Les Bas-Coquarts",
+      "La Faïencerie"
+    ],
+    "voisins": [
+      "sceaux",
+      "fontenay-aux-roses",
+      "antony"
+    ]
+  },
+  {
+    "slug": "fontenay-aux-roses",
+    "name": "Fontenay-aux-Roses",
+    "cp": "92260",
+    "dept": "92",
+    "deptName": "Hauts-de-Seine",
+    "pop": "25 000",
+    "distance": "10",
+    "lat": 48.7903,
+    "lng": 2.3008,
+    "insee": "92032",
+    "quartiers": [
+      "Centre-ville",
+      "Pierrelais",
+      "Blagis",
+      "La Roue",
+      "Scarron",
+      "Plante"
+    ],
+    "voisins": [
+      "sceaux",
+      "chatenay-malabry",
+      "le-plessis-robinson",
+      "bourg-la-reine",
+      "antony"
+    ]
+  }
+]
