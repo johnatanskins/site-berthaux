@@ -117,27 +117,25 @@
 }
 </script>
 
-<!-- ===== Google Ads + GA4 + Meta Pixel (à activer) =====
-     1. Remplacer AW-XXXXXXX, G-XXXXXXX et FB_PIXEL_ID par vos IDs
-     2. Côté Google Ads, créer une action de conversion "submit_form" + "phone_call"
-     3. La conversion réelle se déclenche sur la page merci.html (achat de lead) ============== -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=AW-XXXXXXX"></script>
+<!-- ===== Google Ads + GA4 + Meta Pixel (chargés UNIQUEMENT après consentement RGPD) =====
+     Voir bloc <script id="consent-loader"> en bas de page : il charge gtag.js
+     seulement si l'utilisateur a accepté les cookies "mesure" ou "marketing".
+     stub gtag() défini ici pour que les appels (form, tel) ne plantent jamais — ils
+     sont mis en file et envoyés uniquement après consentement. ================= -->
 <script>
+  // Consent Mode v2 — par défaut TOUT REFUSÉ tant que l'utilisateur n'a pas choisi
   window.dataLayer = window.dataLayer || [];
-  function gtag(){ dataLayer.push(arguments); }
+  window.gtag = window.gtag || function(){ dataLayer.push(arguments); };
+  gtag('consent', 'default', {
+    'ad_storage': 'denied',
+    'ad_user_data': 'denied',
+    'ad_personalization': 'denied',
+    'analytics_storage': 'denied',
+    'functionality_storage': 'granted',
+    'security_storage': 'granted',
+    'wait_for_update': 500
+  });
   gtag('js', new Date());
-  // Google Ads (conversion tracking)
-  gtag('config', 'AW-XXXXXXX');
-  // GA4 (analytics — optionnel)
-  // gtag('config', 'G-XXXXXXX');
-</script>
-<!-- Meta Pixel (Facebook / Instagram Ads) -->
-<script>
-  /*
-  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init','FB_PIXEL_ID');
-  fbq('track','PageView');
-  */
 </script>
 
 <style>
@@ -662,6 +660,131 @@ p{margin:0}
 /* ------- Floating mobile button (legacy round) ------- */
 .fab{display:none}
 
+/* ======= CONSENT MODAL (RGPD / CNIL) ======= */
+.consent-backdrop{
+  position:fixed;inset:0;z-index:1000;
+  background:rgba(10,31,71,.72);
+  backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  display:none;align-items:flex-end;justify-content:center;
+  padding:20px;
+  animation:cFade .25s ease both;
+}
+.consent-backdrop.show{display:flex}
+@keyframes cFade{from{opacity:0}to{opacity:1}}
+@keyframes cSlide{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.consent-card{
+  background:#fff;color:var(--ink);
+  border-radius:20px;
+  width:100%;max-width:680px;
+  box-shadow:0 30px 80px -20px rgba(10,31,71,.5);
+  overflow:hidden;
+  animation:cSlide .35s ease both;
+  border:1px solid rgba(255,255,255,.1);
+}
+.consent-card .head{
+  display:flex;align-items:center;gap:14px;
+  padding:22px 26px 16px;
+  border-bottom:1px solid var(--line);
+}
+.consent-card .head .ico{
+  width:42px;height:42px;border-radius:12px;
+  background:linear-gradient(135deg,var(--navy),#1a3d8a);
+  color:var(--gold);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.consent-card .head .ico svg{width:22px;height:22px}
+.consent-card .head h2{
+  font-size:19px;color:var(--navy);margin:0;letter-spacing:-.015em;
+}
+.consent-card .head .lbl{
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);
+  margin-bottom:2px;
+}
+.consent-card .body{padding:18px 26px 0}
+.consent-card .body p{
+  font-size:14.5px;line-height:1.6;color:var(--ink-2);margin-bottom:14px;
+}
+.consent-card .body p a{color:var(--navy);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.consent-card .body p a:hover{color:var(--red)}
+.consent-cats{
+  display:none;flex-direction:column;gap:10px;
+  margin-bottom:16px;
+}
+.consent-cats.show{display:flex}
+.consent-cat{
+  border:1px solid var(--line);border-radius:12px;padding:14px 16px;
+  display:grid;grid-template-columns:1fr auto;gap:6px 14px;
+  align-items:center;
+}
+.consent-cat .name{font-weight:700;color:var(--navy);font-size:14.5px}
+.consent-cat .desc{font-size:13px;color:var(--ink-2);grid-column:1/-1;line-height:1.5}
+.consent-cat .req{
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;
+  color:var(--ink-3);letter-spacing:.1em;text-transform:uppercase;
+}
+/* iOS-style toggle */
+.tgl{
+  width:44px;height:26px;border-radius:999px;
+  background:var(--line-2);position:relative;cursor:pointer;
+  transition:background .2s ease;flex-shrink:0;
+  border:0;padding:0;
+}
+.tgl::after{
+  content:"";position:absolute;left:3px;top:3px;
+  width:20px;height:20px;border-radius:50%;background:#fff;
+  box-shadow:0 1px 3px rgba(0,0,0,.2);
+  transition:left .2s ease;
+}
+.tgl[aria-pressed="true"]{background:var(--navy)}
+.tgl[aria-pressed="true"]::after{left:21px}
+.tgl[aria-disabled="true"]{background:#16a34a;cursor:not-allowed;opacity:.85}
+.tgl[aria-disabled="true"]::after{left:21px}
+.consent-card .actions{
+  display:grid;grid-template-columns:1fr 1fr;gap:10px;
+  padding:18px 26px 22px;
+  border-top:1px solid var(--line);
+  background:#fafbff;
+}
+.consent-card .actions .btn{
+  width:100%;justify-content:center;padding:14px 16px;font-size:14.5px;border-radius:11px;
+}
+.consent-card .actions .row-2{
+  grid-column:1/-1;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;
+}
+.consent-card .actions .link{
+  background:none;color:var(--ink-2);font-size:13px;font-weight:600;
+  text-decoration:underline;text-underline-offset:3px;padding:6px 10px;border:0;cursor:pointer;
+}
+.consent-card .actions .link:hover{color:var(--navy)}
+.consent-card .foot-links{
+  font-size:12px;color:var(--ink-3);text-align:center;
+  padding:0 26px 14px;
+  font-family:'JetBrains Mono',monospace;letter-spacing:.04em;
+}
+.consent-card .foot-links a{color:var(--ink-2);text-decoration:underline;text-underline-offset:3px}
+.consent-card .foot-links a:hover{color:var(--navy)}
+
+/* Reopen FAB (cookies preferences) */
+.consent-reopen{
+  position:fixed;left:16px;bottom:16px;z-index:80;
+  width:42px;height:42px;border-radius:50%;
+  background:#fff;border:1px solid var(--line);
+  display:none;align-items:center;justify-content:center;
+  color:var(--navy);cursor:pointer;
+  box-shadow:var(--shadow-md);
+  transition:transform .15s ease;
+}
+.consent-reopen:hover{transform:scale(1.08)}
+.consent-reopen svg{width:20px;height:20px}
+.consent-reopen.ready{display:inline-flex}
+
+@media (max-width:560px){
+  .consent-backdrop{padding:0;align-items:flex-end}
+  .consent-card{border-radius:20px 20px 0 0;max-width:100%}
+  .consent-card .actions{grid-template-columns:1fr}
+}
+
 /* ------- Sticky CTA bar mobile ------- */
 .sticky-cta-mobile{
   position:fixed;left:0;right:0;bottom:0;z-index:90;
@@ -727,6 +850,69 @@ p{margin:0}
 </style>
 </head>
 <body>
+
+<!-- ======= CONSENT MODAL — RGPD / CNIL ======= -->
+<div class="consent-backdrop" id="consentModal" role="dialog" aria-modal="true" aria-labelledby="consentTitle" aria-describedby="consentDesc">
+  <div class="consent-card">
+    <div class="head">
+      <div class="ico">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5z"/><circle cx="8.5" cy="11" r="1"/><circle cx="16" cy="13.5" r="1"/><circle cx="11.5" cy="16.5" r="1"/>
+        </svg>
+      </div>
+      <div>
+        <div class="lbl">Confidentialité · RGPD</div>
+        <h2 id="consentTitle">Avant de continuer — votre vie privée</h2>
+      </div>
+    </div>
+    <div class="body">
+      <p id="consentDesc">
+        Notre site dépose des cookies <b>strictement nécessaires</b> à son fonctionnement.
+        Avec votre accord, nous utilisons aussi des cookies de <b>mesure d'audience</b> et de
+        <b>publicité</b> pour améliorer votre expérience et nos campagnes
+        (Google&nbsp;Ads, Meta). Vous pouvez accepter, refuser ou personnaliser à tout moment.
+        Pour en savoir plus : <a href="politique-confidentialite.html">politique de confidentialité</a>.
+      </p>
+
+      <div class="consent-cats" id="consentCats">
+        <div class="consent-cat">
+          <span class="name">Strictement nécessaires</span>
+          <button class="tgl" type="button" aria-pressed="true" aria-disabled="true" aria-label="Cookies nécessaires (toujours actifs)"></button>
+          <span class="desc">Indispensables au fonctionnement du site (sécurité, formulaire de contact, préférences). Pas de désactivation possible.</span>
+        </div>
+        <div class="consent-cat">
+          <span class="name">Mesure d'audience</span>
+          <button class="tgl" type="button" aria-pressed="false" data-cat="analytics" aria-label="Activer la mesure d'audience"></button>
+          <span class="desc">Statistiques anonymisées de visite (Google Analytics) pour comprendre quelles pages sont utiles et corriger les bugs.</span>
+        </div>
+        <div class="consent-cat">
+          <span class="name">Publicité &amp; marketing</span>
+          <button class="tgl" type="button" aria-pressed="false" data-cat="marketing" aria-label="Activer la publicité"></button>
+          <span class="desc">Mesure de conversion Google Ads et Meta Pixel — pour ne pas vous montrer la même pub plusieurs fois et évaluer l'efficacité de nos campagnes.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="btn btn-ghost" id="cBtnReject">Tout refuser</button>
+      <button type="button" class="btn btn-red" id="cBtnAccept">Tout accepter</button>
+      <div class="row-2">
+        <button type="button" class="link" id="cBtnCustomize">Personnaliser mes choix</button>
+        <button type="button" class="link" id="cBtnSave" style="display:none;color:var(--navy);font-weight:700">Enregistrer mes préférences</button>
+      </div>
+    </div>
+    <div class="foot-links">
+      Responsable : Berthaux Compagnon · <a href="politique-confidentialite.html">Politique de confidentialité</a> · <a href="mentions-legales.html">Mentions légales</a>
+    </div>
+  </div>
+</div>
+
+<!-- Bouton flottant pour rouvrir les préférences cookies -->
+<button type="button" class="consent-reopen" id="consentReopen" aria-label="Gérer mes préférences cookies" title="Gérer mes cookies">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5z"/><circle cx="8.5" cy="11" r="1"/><circle cx="16" cy="13.5" r="1"/><circle cx="11.5" cy="16.5" r="1"/>
+  </svg>
+</button>
 
 <!-- ======= TOPBAR ======= -->
 <div class="topbar">
@@ -1281,7 +1467,19 @@ p{margin:0}
           <h3>Merci, c'est bien noté.</h3>
           <p>Nous vous rappelons dans la journée. Pour un cas urgent, appelez le 06 22 22 96 48.</p>
         </div>
-        <form id="quoteForm" novalidate>
+        <form id="quoteForm" novalidate
+              action="https://formsubmit.co/ajax/charles@lescompagnonsberthaux.com"
+              method="POST">
+          <!-- Config FormSubmit (gratuit, sans inscription).
+               Au 1er envoi vers cette adresse, FormSubmit envoie un email de
+               vérification à charles@lescompagnonsberthaux.com — il faut cliquer
+               le lien pour activer la réception. Ensuite, chaque devis arrive en
+               clair dans la boîte mail. Voir https://formsubmit.co -->
+          <input type="hidden" name="_subject" value="Nouveau devis — site Berthaux Compagnon" />
+          <input type="hidden" name="_template" value="table" />
+          <input type="hidden" name="_captcha" value="false" />
+          <input type="hidden" name="_honey" value="" style="display:none" />
+          <input type="hidden" name="_next" value="https://lescompagnonsberthaux.com/merci.html" />
           <h3>Recevez votre devis gratuit.</h3>
           <div class="sub">Réponse écrite et détaillée sous 24h ouvrées.</div>
 
@@ -1391,6 +1589,7 @@ p{margin:0}
     </div>
     <div class="legal">
       <span>© 2026 Berthaux Compagnon · SIRET 802 099 440 00017</span>
+      <span><a href="mentions-legales.html" style="color:#cfd6ea">Mentions légales</a> · <a href="politique-confidentialite.html" style="color:#cfd6ea">Confidentialité</a> · <button type="button" id="footerCookies" style="background:none;border:0;color:#cfd6ea;font:inherit;cursor:pointer;text-decoration:underline;padding:0">Gérer mes cookies</button></span>
       <span>Garantie décennale · RC Pro · TVA intracommunautaire</span>
     </div>
   </div>
@@ -1427,7 +1626,7 @@ document.querySelectorAll('.faq-item').forEach(function(item){
 var first = document.querySelector('.faq-item');
 if (first) first.classList.add('open');
 
-// Form
+// Form — envoi vers email via FormSubmit.co (AJAX, sans rechargement)
 var form = document.getElementById('quoteForm');
 if (form){
   form.addEventListener('submit', function(e){
@@ -1440,18 +1639,35 @@ if (form){
       } else { el.style.borderColor = ''; }
     });
     if (!ok) return;
-    document.getElementById('formSuccess').classList.add('show');
-    window.scrollTo({ top: document.getElementById('formSuccess').getBoundingClientRect().top + window.scrollY - 120, behavior:'smooth' });
 
-    // === Tracking conversion (Google Ads + GA4 + Meta Pixel) ===
-    if (typeof gtag === 'function') {
-      gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXX/FORM_LABEL' });
-      gtag('event', 'generate_lead', { 'value': 1.0, 'currency': 'EUR' });
-    }
-    if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+    var btn = form.querySelector('button[type="submit"]');
+    var originalLabel = btn ? btn.innerHTML : '';
+    if (btn){ btn.disabled = true; btn.innerHTML = 'Envoi en cours…'; }
 
-    // Redirection page merci (déclenche conversion principale) - décommenter quand prêt
-    // setTimeout(function(){ window.location.href = 'merci.html'; }, 1200);
+    var data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    })
+    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return { ok: r.ok, json: j }; }); })
+    .then(function(res){
+      if (!res.ok) throw new Error('FormSubmit error');
+      // Succès
+      document.getElementById('formSuccess').classList.add('show');
+      window.scrollTo({ top: document.getElementById('formSuccess').getBoundingClientRect().top + window.scrollY - 120, behavior:'smooth' });
+
+      // === Tracking conversion (Google Ads + GA4 + Meta Pixel) ===
+      if (typeof gtag === 'function') {
+        gtag('event', 'conversion', { 'send_to': 'AW-10926039903/FORM_LABEL' });
+        gtag('event', 'generate_lead', { 'value': 1.0, 'currency': 'EUR' });
+      }
+      if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+    })
+    .catch(function(){
+      if (btn){ btn.disabled = false; btn.innerHTML = originalLabel; }
+      alert("Désolé, l'envoi a échoué. Merci de réessayer ou de nous appeler au 06 22 22 96 48.");
+    });
   });
 }
 
@@ -1459,7 +1675,7 @@ if (form){
 document.querySelectorAll('a[href^="tel:"]').forEach(function(a){
   a.addEventListener('click', function(){
     if (typeof gtag === 'function') {
-      gtag('event', 'conversion', { 'send_to': 'AW-XXXXXXX/PHONE_LABEL' });
+      gtag('event', 'conversion', { 'send_to': 'AW-10926039903/PHONE_LABEL' });
       gtag('event', 'phone_call', { 'value': 1.0, 'currency': 'EUR' });
     }
     if (typeof fbq === 'function') { fbq('track', 'Contact'); }
@@ -1563,5 +1779,122 @@ if (mb){
 })();
 </script>
 
+</body>
+<script>
+/* ============================================================
+   CONSENT RGPD — gestion bandeau + Consent Mode v2 (Google) +
+   chargement conditionnel de gtag.js et du Meta Pixel.
+   Stockage local : localStorage.berthaux_consent
+   { necessary:true, analytics:bool, marketing:bool, ts:Date.now() }
+   ============================================================ */
+(function(){
+  var KEY = 'berthaux_consent';
+  var modal = document.getElementById('consentModal');
+  var cats  = document.getElementById('consentCats');
+  var reopen = document.getElementById('consentReopen');
+  var btnAccept = document.getElementById('cBtnAccept');
+  var btnReject = document.getElementById('cBtnReject');
+  var btnCustomize = document.getElementById('cBtnCustomize');
+  var btnSave = document.getElementById('cBtnSave');
+
+  var GA_ID = 'AW-10926039903'; // Google Ads — Berthaux Compagnon
+  var FB_ID = 'FB_PIXEL_ID';    // ← remplacer par votre ID Meta Pixel quand prêt
+
+  function read(){
+    try { return JSON.parse(localStorage.getItem(KEY) || 'null'); }
+    catch(e) { return null; }
+  }
+  function save(c){
+    c.ts = Date.now();
+    try { localStorage.setItem(KEY, JSON.stringify(c)); } catch(e){}
+  }
+  function show(){ modal.classList.add('show'); document.body.style.overflow='hidden'; }
+  function hide(){ modal.classList.remove('show'); document.body.style.overflow=''; reopen.classList.add('ready'); }
+
+  function loadGtag(){
+    if (window.__gtagLoaded) return;
+    if (GA_ID.indexOf('XXXX') !== -1) return;   // pas configuré
+    window.__gtagLoaded = true;
+    var s = document.createElement('script');
+    s.async = true;
+    s.src = 'https://www.googletagmanager.com/gtag/js?id=' + GA_ID;
+    document.head.appendChild(s);
+    gtag('config', GA_ID, { 'anonymize_ip': true });
+  }
+  function loadMetaPixel(){
+    if (window.__fbLoaded || FB_ID.indexOf('PIXEL') !== -1) return;
+    window.__fbLoaded = true;
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', FB_ID);
+    fbq('track', 'PageView');
+  }
+  function applyConsent(c){
+    gtag('consent', 'update', {
+      'ad_storage':         c.marketing ? 'granted' : 'denied',
+      'ad_user_data':       c.marketing ? 'granted' : 'denied',
+      'ad_personalization': c.marketing ? 'granted' : 'denied',
+      'analytics_storage':  c.analytics ? 'granted' : 'denied'
+    });
+    if (c.analytics || c.marketing) loadGtag();
+    if (c.marketing) loadMetaPixel();
+  }
+  function setToggles(c){
+    cats.querySelectorAll('.tgl[data-cat]').forEach(function(t){
+      t.setAttribute('aria-pressed', !!c[t.dataset.cat]);
+    });
+  }
+
+  // bind toggles
+  cats.querySelectorAll('.tgl[data-cat]').forEach(function(t){
+    t.addEventListener('click', function(){
+      if (t.getAttribute('aria-disabled') === 'true') return;
+      t.setAttribute('aria-pressed', t.getAttribute('aria-pressed') !== 'true');
+    });
+  });
+
+  btnAccept.addEventListener('click', function(){
+    var c = { necessary:true, analytics:true, marketing:true };
+    save(c); applyConsent(c); hide();
+  });
+  btnReject.addEventListener('click', function(){
+    var c = { necessary:true, analytics:false, marketing:false };
+    save(c); applyConsent(c); hide();
+  });
+  btnCustomize.addEventListener('click', function(){
+    cats.classList.add('show');
+    btnCustomize.style.display = 'none';
+    btnSave.style.display = 'inline-flex';
+  });
+  btnSave.addEventListener('click', function(){
+    var c = {
+      necessary: true,
+      analytics: cats.querySelector('.tgl[data-cat="analytics"]').getAttribute('aria-pressed') === 'true',
+      marketing: cats.querySelector('.tgl[data-cat="marketing"]').getAttribute('aria-pressed') === 'true'
+    };
+    save(c); applyConsent(c); hide();
+  });
+  reopen.addEventListener('click', function(){
+    var c = read() || { necessary:true, analytics:false, marketing:false };
+    setToggles(c);
+    cats.classList.add('show');
+    btnCustomize.style.display = 'none';
+    btnSave.style.display = 'inline-flex';
+    show();
+  });
+
+  // lien "Gérer mes cookies" dans le footer
+  var fc = document.getElementById('footerCookies');
+  if (fc) fc.addEventListener('click', function(){ reopen.click(); });
+
+  // décision initiale
+  var existing = read();
+  if (existing) {
+    applyConsent(existing);
+    reopen.classList.add('ready');
+  } else {
+    show();
+  }
+})();
+</script>
 </body>
 </html>
