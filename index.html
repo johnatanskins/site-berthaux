@@ -1,6 +1,14 @@
 <!doctype html>
 <html lang="fr">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TT89NBWT');</script>
+<!-- End Google Tag Manager -->
+
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>Couvreur Essonne 91 — Berthaux Compagnon · Devis gratuit · ☎ 06 22 22 96 48</title>
@@ -850,6 +858,11 @@ p{margin:0}
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TT89NBWT"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 
 <!-- ======= CONSENT MODAL — RGPD / CNIL ======= -->
 <div class="consent-backdrop" id="consentModal" role="dialog" aria-modal="true" aria-labelledby="consentTitle" aria-describedby="consentDesc">
@@ -1663,6 +1676,14 @@ if (form){
         gtag('event', 'generate_lead', { 'value': 1.0, 'currency': 'EUR' });
       }
       if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+      // === Tracking GTM (dataLayer) — événement standard pour Google Ads via GTM ===
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'generate_lead',
+        form_id: 'quoteForm',
+        value: 1.0,
+        currency: 'EUR'
+      });
     })
     .catch(function(){
       if (btn){ btn.disabled = false; btn.innerHTML = originalLabel; }
