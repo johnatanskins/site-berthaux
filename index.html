@@ -976,7 +976,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="grid">
       <div>
         <span class="badge-pill"><span class="star">★</span> Couvreur de père en fils — disponible 6j/7</span>
-        <h1>Votre toiture entre les mains <span class="accent">d'experts</span>, en Essonne (91), 92 et 94.</h1>
+        <h1>Votre toiture entre les mains <span class="accent" style="line-height: 1.08">d'experts</span>, en Essonne (91), 92 et 94.</h1>
         <p class="sub">Couverture, charpente, zinguerie. Devis gratuit sous 24h, intervention rapide sur fuite, travail garanti dix ans. Vous parlez directement à notre équipe — pas de commercial.</p>
         <div class="ctas">
           <a class="btn btn-red btn-lg" href="tel:+33622229648">
@@ -1491,8 +1491,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="hidden" name="_subject" value="Nouveau devis — site Berthaux Compagnon" />
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
-          <input type="hidden" name="_honey" value="" style="display:none" />
           <input type="hidden" name="_next" value="https://lescompagnonsberthaux.com/merci.html" />
+          <!-- Honeypot anti-robot : champ invisible pour les humains, rempli par les bots.
+               FormSubmit ignore tout envoi où _honey est rempli. -->
+          <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true"
+                 style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" />
           <h3>Recevez votre devis gratuit.</h3>
           <div class="sub">Réponse écrite et détaillée sous 24h ouvrées.</div>
 
@@ -1532,6 +1535,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="f-field">
             <label>Décrivez votre projet</label>
             <textarea name="message" placeholder="Surface approximative, type de tuiles, photos disponibles, urgence éventuelle…"></textarea>
+          </div>
+          <div class="f-field" id="captchaField">
+            <label>Anti-robot <span class="req">*</span> — <span id="captchaQ" style="font-weight:700;color:var(--navy)"></span></label>
+            <input type="text" id="captchaInput" inputmode="numeric" autocomplete="off" placeholder="Votre réponse" />
           </div>
           <button type="submit" class="btn btn-red submit">
             Recevoir mon devis gratuit →
@@ -1642,6 +1649,18 @@ if (first) first.classList.add('open');
 // Form — envoi vers email via FormSubmit.co (AJAX, sans rechargement)
 var form = document.getElementById('quoteForm');
 if (form){
+  // ===== Anti-robots : captcha simple (addition) + délai minimal =====
+  var captchaSum = 0;
+  var formLoadedAt = Date.now();
+  function makeCaptcha(){
+    var a = Math.floor(Math.random() * 8) + 1;   // 1..8
+    var b = Math.floor(Math.random() * 8) + 1;   // 1..8
+    captchaSum = a + b;
+    var q = document.getElementById('captchaQ');
+    if (q) q.textContent = 'Combien font ' + a + ' + ' + b + ' ?';
+  }
+  makeCaptcha();
+
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var ok = true;
@@ -1652,6 +1671,37 @@ if (form){
       } else { el.style.borderColor = ''; }
     });
     if (!ok) return;
+
+    // 1) Honeypot rempli => robot : on bloque silencieusement
+    var honey = form.querySelector('[name="_honey"]');
+    if (honey && honey.value){ return; }
+
+    // 2) Envoi trop rapide (< 3 s après chargement) => robot
+    if (Date.now() - formLoadedAt < 3000){ return; }
+
+    // 3) Captcha : la réponse doit être correcte
+    var capEl = document.getElementById('captchaInput');
+    var capField = document.getElementById('captchaField');
+    if (!capEl || parseInt(capEl.value, 10) !== captchaSum){
+      if (capEl) capEl.style.borderColor = 'var(--red)';
+      if (capField){
+        var old = capField.querySelector('.cap-err');
+        if (!old){
+          var m = document.createElement('div');
+          m.className = 'cap-err';
+          m.style.cssText = 'color:var(--red);font-size:13px;margin-top:6px;font-weight:600';
+          m.textContent = 'Réponse incorrecte, merci de réessayer.';
+          capField.appendChild(m);
+        }
+      }
+      makeCaptcha();
+      if (capEl) capEl.value = '';
+      return;
+    }
+    // Captcha OK : on nettoie l'éventuel message d'erreur
+    if (capEl) capEl.style.borderColor = '';
+    var errMsg = capField && capField.querySelector('.cap-err');
+    if (errMsg) errMsg.remove();
 
     var btn = form.querySelector('button[type="submit"]');
     var originalLabel = btn ? btn.innerHTML : '';
