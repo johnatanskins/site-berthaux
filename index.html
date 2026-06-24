@@ -25,11 +25,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 
-<link rel="preload" as="image" href="photos/drone-villa-renovation.webp" type="image/webp" fetchpriority="high" />
+<!-- Pas de preload image : le LCP de cette page est le titre H1 (texte) sur le fond hero.
+     Les photos de la galerie sont sous la ligne de flottaison et chargées en lazy. -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;600;700&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;600;700&display=swap" /></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'" />
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
 
 <script type="application/ld+json">
 {
@@ -67,6 +68,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "bestRating": "5",
     "ratingCount": "80"
   },
+  "review": [
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Benjamin Rochette" },
+      "reviewBody": "Très satisfait de l'intervention de Berthaux Compagnon pour la rénovation de ma toiture à Saulx-les-Chartreux. Équipe professionnelle, ponctuelle et travail de qualité. Chantier propre et bien organisé."
+    },
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Thomas Rincon" },
+      "reviewBody": "Des artisans comme nous aimerions en avoir davantage. Disponible et de bon conseil, je recommande vivement !"
+    },
+    {
+      "@type": "Review",
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "author": { "@type": "Person", "name": "Marie Barbe Borillon" },
+      "reviewBody": "Ce fut un vrai plaisir de travailler avec Monsieur Berthaux. Disponible, chaleureux, souriant et le travail a été effectué avec qualité et propreté."
+    }
+  ],
   "founder": { "@type": "Person", "name": "Charles Berthaux" }
 }
 </script>
@@ -624,7 +645,7 @@ p{margin:0}
 .f-field label{font-size:13px;font-weight:600;color:var(--ink-2)}
 .f-field label .req{color:var(--red)}
 .f-field input,.f-field select,.f-field textarea{
-  border:1.5px solid var(--line);border-radius:10px;padding:13px 14px;font:inherit;font-size:15px;
+  border:1.5px solid var(--line);border-radius:10px;padding:13px 14px;font:inherit;font-size:16px;
   background:#fff;color:var(--ink);transition:border-color .15s, box-shadow .15s;
   font-family:inherit;
 }
@@ -1171,8 +1192,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
       </button>
       <div class="gallery" id="gallery">
-        <a class="tile" href="#devis"><picture><source type="image/webp" srcset="photos/drone-villa-renovation.webp" /><img src="photos/drone-villa-renovation.jpg" alt="Vue drone d'une rénovation de toiture en tuiles sur villa" width="800" height="600" loading="eager" fetchpriority="high" /></picture><div class="overlay"><div class="meta"><span class="cat">Vue drone · Chantier en cours</span><h3>Rénovation toiture villa</h3><span class="where">Antony (92)</span></div></div></a>
-        <a class="tile" href="#devis"><img src="photos/drone-banderole-berthaux.jpg" alt="Vue drone d'un pavillon en cours de rénovation avec banderole Berthaux Compagnon" width="800" height="600" loading="eager" /><div class="overlay"><div class="meta"><span class="cat">Vue drone · Réfection complète</span><h3>Pavillon liteaux + tuiles</h3><span class="where">Saulx-les-Chartreux (91)</span></div></div></a>
+        <a class="tile" href="#devis"><picture><source type="image/webp" srcset="photos/drone-villa-renovation.webp" /><img src="photos/drone-villa-renovation.jpg" alt="Vue drone d'une rénovation de toiture en tuiles sur villa" width="800" height="600" loading="lazy" /></picture><div class="overlay"><div class="meta"><span class="cat">Vue drone · Chantier en cours</span><h3>Rénovation toiture villa</h3><span class="where">Antony (92)</span></div></div></a>
+        <a class="tile" href="#devis"><img src="photos/drone-banderole-berthaux.jpg" alt="Vue drone d'un pavillon en cours de rénovation avec banderole Berthaux Compagnon" width="800" height="600" loading="lazy" /><div class="overlay"><div class="meta"><span class="cat">Vue drone · Réfection complète</span><h3>Pavillon liteaux + tuiles</h3><span class="where">Saulx-les-Chartreux (91)</span></div></div></a>
         <a class="tile" href="#devis"><img src="photos/drone-toiture-tuiles-finie.jpg" alt="Vue drone d'une toiture pavillonnaire neuve en tuiles rouges" width="800" height="600" loading="lazy" /><div class="overlay"><div class="meta"><span class="cat">Vue drone · Chantier livré</span><h3>Toiture pavillon neuve</h3><span class="where">Massy (91)</span></div></div></a>
         <div class="tile tile-cta">
           <div class="cta-inner">
@@ -1346,10 +1367,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
          ci-dessous s'affichent. Dès que le widget charge, ils
          disparaissent automatiquement.
          ============================================================ -->
+    <!-- Widget Elfsight EN PAUSE : platform.js ne se charge plus tant que l'APP_ID
+         n'est pas configuré (économie d'un script tiers + d'un MutationObserver).
+         Pour réactiver : décommenter le bloc ci-dessous, remplacer APP_ID, et
+         restaurer le script d'observation plus bas dans cette section.
     <div id="google-reviews-live">
       <script src="https://static.elfsight.com/platform/platform.js" async></script>
       <div class="elfsight-app-APP_ID" data-elfsight-app-lazy></div>
     </div>
+    -->
 
     <div class="reviews" id="reviews-fallback">
       <article class="review">
@@ -1378,24 +1404,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </article>
     </div>
 
-    <script>
-    // Quand le widget Elfsight charge, masquer les avis statiques de fallback.
-    (function(){
-      var fallback = document.getElementById('reviews-fallback');
-      var live = document.getElementById('google-reviews-live');
-      if (!fallback || !live) return;
-      var observer = new MutationObserver(function(){
-        // Si Elfsight a injecté son contenu (iframe ou contenu interne), on cache le fallback.
-        if (live.querySelector('iframe, .eapps-widget, [class*="elfsight"][class*="loaded"]')){
-          fallback.style.display = 'none';
-          observer.disconnect();
-        }
-      });
-      observer.observe(live, { childList:true, subtree:true });
-      // Sécurité : après 6s sans widget, on garde le fallback visible.
-      setTimeout(function(){ observer.disconnect(); }, 6000);
-    })();
-    </script>
+    <!-- Script d'observation Elfsight retiré (widget en pause) : les avis ci-dessus
+         s'affichent en permanence. À restaurer en même temps que le widget. -->
   </div>
 </section>
 
@@ -1494,7 +1504,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                clair dans la boîte mail. Voir https://formsubmit.co -->
           <input type="hidden" name="_subject" value="Nouveau devis — site Berthaux Compagnon" />
           <input type="hidden" name="_template" value="table" />
-          <input type="hidden" name="_captcha" value="true" />
+          <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_next" value="https://lescompagnonsberthaux.com/merci.html" />
           <!-- Honeypot anti-robot : champ invisible pour les humains, rempli par les bots.
                FormSubmit ignore tout envoi où _honey est rempli. -->
@@ -1539,10 +1549,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="f-field">
             <label>Décrivez votre projet</label>
             <textarea name="message" placeholder="Surface approximative, type de tuiles, photos disponibles, urgence éventuelle…"></textarea>
-          </div>
-          <div class="f-field" id="captchaField">
-            <label>Anti-robot <span class="req">*</span> — <span id="captchaQ" style="font-weight:700;color:var(--navy)"></span></label>
-            <input type="text" id="captchaInput" inputmode="numeric" autocomplete="off" placeholder="Votre réponse" />
           </div>
           <button type="submit" class="btn btn-red submit">
             Recevoir mon devis gratuit →
@@ -1653,28 +1659,66 @@ if (first) first.classList.add('open');
 // Form — envoi vers email via FormSubmit.co (AJAX, sans rechargement)
 var form = document.getElementById('quoteForm');
 if (form){
-  // ===== Anti-robots : captcha simple (addition) + délai minimal =====
-  var captchaSum = 0;
+  // ===== Anti-robots INVISIBLE (zéro friction) =====
+  // Le vrai rempart est le honeypot _honey, vérifié côté SERVEUR par FormSubmit.
+  // On y ajoute deux contrôles côté client : délai minimal + preuve d'interaction.
   var formLoadedAt = Date.now();
-  function makeCaptcha(){
-    var a = Math.floor(Math.random() * 8) + 1;   // 1..8
-    var b = Math.floor(Math.random() * 8) + 1;   // 1..8
-    captchaSum = a + b;
-    var q = document.getElementById('captchaQ');
-    if (q) q.textContent = 'Combien font ' + a + ' + ' + b + ' ?';
+  var userInteracted = false;
+  form.addEventListener('focusin', function(){ userInteracted = true; }, { once:true });
+
+  // ===== Messages d'erreur inline par champ (UX) =====
+  function setErr(el, msg){
+    el.style.borderColor = 'var(--red)';
+    el.setAttribute('aria-invalid', 'true');
+    var f = el.closest('.f-field');
+    if (!f) return;
+    var m = f.querySelector('.field-err');
+    if (!m){
+      m = document.createElement('div');
+      m.className = 'field-err';
+      m.style.cssText = 'color:var(--red);font-size:12.5px;margin-top:5px;font-weight:600';
+      f.appendChild(m);
+    }
+    m.textContent = msg;
   }
-  makeCaptcha();
+  function clearErr(el){
+    el.style.borderColor = '';
+    el.removeAttribute('aria-invalid');
+    var f = el.closest('.f-field');
+    if (!f) return;
+    var m = f.querySelector('.field-err');
+    if (m) m.remove();
+  }
+  // L'erreur disparaît dès que l'utilisateur corrige le champ
+  form.querySelectorAll('input, select, textarea').forEach(function(el){
+    el.addEventListener('input', function(){ userInteracted = true; if (el.value.trim()) clearErr(el); });
+    el.addEventListener('change', function(){ userInteracted = true; if (el.value.trim()) clearErr(el); });
+  });
 
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var ok = true;
+    var firstBad = null;
     form.querySelectorAll('[required]').forEach(function(el){
       if (!el.value.trim()){
-        el.style.borderColor = 'var(--red)';
+        setErr(el, 'Ce champ est obligatoire.');
         ok = false;
-      } else { el.style.borderColor = ''; }
+        if (!firstBad) firstBad = el;
+      } else { clearErr(el); }
     });
-    if (!ok) return;
+    // Format email (si renseigné)
+    var emailEl = form.querySelector('[name="email"]');
+    if (emailEl && emailEl.value.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(emailEl.value.trim())){
+      setErr(emailEl, 'Adresse email invalide — vérifiez la saisie.');
+      ok = false; if (!firstBad) firstBad = emailEl;
+    }
+    // Téléphone : au moins 9 chiffres
+    var telEl = form.querySelector('[name="tel"]');
+    if (telEl && telEl.value.trim() && telEl.value.replace(/\D/g, '').length < 9){
+      setErr(telEl, 'Numéro de téléphone incomplet.');
+      ok = false; if (!firstBad) firstBad = telEl;
+    }
+    if (!ok){ if (firstBad) firstBad.focus(); return; }
 
     // 1) Honeypot rempli => robot : on bloque silencieusement
     var honey = form.querySelector('[name="_honey"]');
@@ -1683,29 +1727,8 @@ if (form){
     // 2) Envoi trop rapide (< 3 s après chargement) => robot
     if (Date.now() - formLoadedAt < 3000){ return; }
 
-    // 3) Captcha : la réponse doit être correcte
-    var capEl = document.getElementById('captchaInput');
-    var capField = document.getElementById('captchaField');
-    if (!capEl || parseInt(capEl.value, 10) !== captchaSum){
-      if (capEl) capEl.style.borderColor = 'var(--red)';
-      if (capField){
-        var old = capField.querySelector('.cap-err');
-        if (!old){
-          var m = document.createElement('div');
-          m.className = 'cap-err';
-          m.style.cssText = 'color:var(--red);font-size:13px;margin-top:6px;font-weight:600';
-          m.textContent = 'Réponse incorrecte, merci de réessayer.';
-          capField.appendChild(m);
-        }
-      }
-      makeCaptcha();
-      if (capEl) capEl.value = '';
-      return;
-    }
-    // Captcha OK : on nettoie l'éventuel message d'erreur
-    if (capEl) capEl.style.borderColor = '';
-    var errMsg = capField && capField.querySelector('.cap-err');
-    if (errMsg) errMsg.remove();
+    // 3) Preuve d'interaction humaine : aucun focus ni saisie => robot, on bloque silencieusement
+    if (!userInteracted){ return; }
 
     var btn = form.querySelector('button[type="submit"]');
     var originalLabel = btn ? btn.innerHTML : '';
@@ -1851,6 +1874,39 @@ if (mb){
 
   buildDots();
   syncArrows();
+})();
+
+/* ===== Pré-remplissage « Type de travaux » depuis les cartes services ===== */
+(function(){
+  var sel = document.querySelector('#quoteForm select[name="type"]');
+  if(!sel) return;
+  var map = [
+    [/r[ée]novation/i,            'Rénovation de toiture'],
+    [/urgence|fuite|temp[êe]te/i, 'Urgence fuite / tempête'],
+    [/zinguerie/i,                'Zinguerie (gouttières, etc.)'],
+    [/charpente/i,                'Charpente / traitement bois'],
+    [/velux/i,                    'Pose VELUX'],
+    [/d[ée]moussage|hydrofuge/i,  'Démoussage / hydrofuge']
+  ];
+  function setType(val){
+    for(var i=0;i<sel.options.length;i++){
+      if(sel.options[i].value === val){
+        sel.value = val;
+        sel.dispatchEvent(new Event('change'));
+        return;
+      }
+    }
+  }
+  document.querySelectorAll('.svc').forEach(function(card){
+    var lnk = card.querySelector('a.lnk[href="#devis"]');
+    var h3  = card.querySelector('h3');
+    if(!lnk || !h3) return;
+    var txt = h3.textContent || '';
+    var hit = null;
+    for(var i=0;i<map.length;i++){ if(map[i][0].test(txt)){ hit = map[i][1]; break; } }
+    if(!hit) return;
+    lnk.addEventListener('click', function(){ setType(hit); });
+  });
 })();
 </script>
 
