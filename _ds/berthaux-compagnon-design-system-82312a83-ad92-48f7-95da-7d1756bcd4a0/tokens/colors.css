@@ -1,0 +1,45 @@
+/* =============================================================
+   BERTHAUX COMPAGNON — Color tokens
+   Brand: navy (trust), red (urgency/action), gold (craft accent)
+   ============================================================= */
+:root {
+  /* ---- Brand palette ---- */
+  --navy: #0F2A5C;       /* primary brand — headers, trust surfaces */
+  --navy-700: #13316b;   /* navy hover / lighter band */
+  --navy-900: #0a1f47;   /* deepest navy — topbar, footer, hero base */
+  --red: #C8102E;        /* action / urgency — primary CTA */
+  --red-700: #a40d25;    /* red hover */
+  --gold: #F4B400;       /* craft accent — underlines, pins, stars */
+
+  /* ---- Surfaces ---- */
+  --bg: #F7F8FC;         /* page background — cool off-white */
+  --white: #ffffff;
+
+  /* ---- Ink (text) ---- */
+  --ink: #0B1120;        /* primary text */
+  --ink-2: #384256;      /* secondary / body text */
+  --ink-3: #6b7388;      /* muted / eyebrow / captions */
+
+  /* ---- Lines ---- */
+  --line: #e3e7f1;       /* hairline borders, card edges */
+  --line-2: #cfd5e6;     /* stronger dividers, inactive dots */
+
+  /* ---- Semantic / status ---- */
+  --success: #16a34a;    /* checkmarks, form success */
+  --success-bg: #f0fdf4;
+  --live: #22c55e;       /* "disponible" status dot */
+
+  /* ---- Semantic aliases ---- */
+  --text-strong: var(--ink);
+  --text-body: var(--ink-2);
+  --text-muted: var(--ink-3);
+  --surface-page: var(--bg);
+  --surface-card: var(--white);
+  --surface-dark: var(--navy-900);
+  --border-default: var(--line);
+  --border-strong: var(--line-2);
+  --action-primary: var(--red);
+  --action-primary-hover: var(--red-700);
+  --action-secondary: var(--navy);
+  --accent: var(--gold);
+}

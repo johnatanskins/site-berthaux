@@ -880,6 +880,31 @@ p{margin:0}
   .final{padding:72px 18px}
   .reviews-head{flex-direction:column;align-items:flex-start}
 }
+
+/* ===== CTA flottant mobile ===== */
+.cta-devis-float{
+  position:fixed;
+  left:16px;right:16px;bottom:16px;
+  z-index:95;                 /* au-dessus de la galerie / barre, sous la bannière cookies (z-index:1000) */
+  display:none;
+  align-items:center;justify-content:center;gap:10px;
+  height:56px;                /* hauteur confortable au pouce */
+  background:var(--red);color:#fff;
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:16px;
+  text-align:center;text-decoration:none;
+  border-radius:999px;        /* pilule, comme le bouton tél rouge */
+  box-shadow:var(--shadow-md);
+  opacity:0;transform:translateY(12px);pointer-events:none;
+  transition:opacity .25s ease, transform .25s ease, background .15s ease;
+}
+.cta-devis-float.is-visible{opacity:1;transform:translateY(0);pointer-events:auto}
+.cta-devis-float:hover,.cta-devis-float:active{background:var(--red-700)}
+.cta-devis-float:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.cta-devis-float svg{width:20px;height:20px;flex-shrink:0}
+@media (max-width:899px){            /* visible uniquement sur mobile / petites tablettes */
+  .cta-devis-float{display:inline-flex}
+  body{padding-bottom:88px}          /* évite que le bouton masque le footer en permanence */
+}
 </style>
 </head>
 <body>
@@ -1906,6 +1931,56 @@ if (mb){
     for(var i=0;i<map.length;i++){ if(map[i][0].test(txt)){ hit = map[i][1]; break; } }
     if(!hit) return;
     lnk.addEventListener('click', function(){ setType(hit); });
+  });
+})();
+</script>
+
+<!-- ===== CTA flottant mobile ===== -->
+<a href="#devis" id="ctaDevisFloat" class="cta-devis-float" aria-label="Recevoir mon devis gratuit">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  Recevoir mon devis gratuit
+</a>
+
+<script>
+/* ===== CTA flottant mobile — apparition au scroll, masqué près du formulaire ===== */
+(function(){
+  var btn = document.getElementById('ctaDevisFloat');
+  if(!btn) return;
+  var devis = document.getElementById('devis');
+  var formInView = false;
+
+  // Détecte la visibilité du formulaire #devis sans scroll listener bloquant
+  if('IntersectionObserver' in window && devis){
+    new IntersectionObserver(function(entries){
+      formInView = entries[0].isIntersecting;
+      update();
+    }, { threshold:0 }).observe(devis);
+  }
+
+  // Scroll throttlé via requestAnimationFrame (passif, non bloquant)
+  var ticking = false;
+  function onScroll(){
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){ update(); ticking = false; });
+  }
+  function update(){
+    var show = window.pageYOffset > 600 && !formInView;
+    btn.classList.toggle('is-visible', show);
+  }
+  window.addEventListener('scroll', onScroll, { passive:true });
+  update();
+
+  // Smooth scroll vers le formulaire + tracking
+  btn.addEventListener('click', function(e){
+    if(devis){
+      e.preventDefault();
+      var y = devis.getBoundingClientRect().top + window.pageYOffset - 12;
+      window.scrollTo({ top:y, behavior:'smooth' });
+    }
+    if(typeof gtag === 'function'){
+      gtag('event', 'cta_devis_flottant', { 'event_category':'engagement', 'event_label':'cta_flottant_mobile' });
+    }
   });
 })();
 </script>

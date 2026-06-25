@@ -1,0 +1,41 @@
+/* =============================================================
+   BERTHAUX COMPAGNON — Typography tokens
+   Display: Plus Jakarta Sans (800, tight tracking)
+   Body:    Inter (400/600/700)
+   Mono:    JetBrains Mono — eyebrows, labels, phone, meta
+   ============================================================= */
+:root {
+  /* ---- Families ---- */
+  --font-display: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  --font-body: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* ---- Weights ---- */
+  --fw-regular: 400;   /* @kind font */
+  --fw-semibold: 600;  /* @kind font */
+  --fw-bold: 700;      /* @kind font */
+  --fw-extrabold: 800; /* @kind font */
+
+  /* ---- Display / heading sizes (fluid, as used on site) ---- */
+  --fs-h1: clamp(34px, 5.2vw, 62px); /* @kind font */
+  --fs-h2: clamp(28px, 3.6vw, 44px); /* @kind font */
+  --fs-h3: 20px;
+  --fs-h4: 18px;
+
+  /* ---- Body scale ---- */
+  --fs-lead: 18.5px;     /* hero sub, section intros */
+  --fs-body: 16px;       /* base */
+  --fs-sm: 14.5px;       /* card body, nav */
+  --fs-xs: 13px;         /* captions */
+
+  /* ---- Eyebrow / mono label ---- */
+  --fs-eyebrow: 11.5px;
+  --tracking-eyebrow: 0.18em;
+  --tracking-display: -0.02em;
+  --tracking-h2: -0.025em;
+
+  /* ---- Line heights ---- */
+  --lh-display: 1.08; /* @kind font */
+  --lh-body: 1.55;    /* @kind font */
+  --lh-prose: 1.7;    /* @kind font */
+}
