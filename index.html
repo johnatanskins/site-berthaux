@@ -1555,9 +1555,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <input type="hidden" name="_template" value="table" />
           <input type="hidden" name="_captcha" value="false" />
           <input type="hidden" name="_next" value="https://lescompagnonsberthaux.com/merci.html" />
-          <!-- Honeypot anti-robot : champ invisible pour les humains, rempli par les bots.
-               FormSubmit ignore tout envoi où _honey est rempli. -->
+          <!-- Honeypot inversé : FormSubmit rejette côté SERVEUR tout envoi où _honey
+               est rempli. Le champ part donc rempli dans le HTML, et le script de la
+               page le vide au chargement. Un robot qui poste le formulaire sans exécuter
+               le JavaScript renvoie la valeur telle quelle et se fait bloquer ;
+               un visiteur réel a un champ vide et passe sans rien voir. -->
           <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true"
+                 value="berthaux-anti-robot"
                  style="position:absolute;left:-9999px;top:-9999px;width:1px;height:1px;opacity:0;pointer-events:none" />
           <h3>Recevez votre devis gratuit.</h3>
           <div class="sub">Réponse écrite et détaillée sous 24h ouvrées.</div>
@@ -1599,6 +1603,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <label>Décrivez votre projet</label>
             <textarea name="message" placeholder="Surface approximative, type de tuiles, photos disponibles, urgence éventuelle…"></textarea>
           </div>
+          <noscript>
+            <div style="background:#FFF4F5;border:1px solid var(--red);border-radius:12px;padding:16px 18px;margin-bottom:14px;color:var(--ink-2);font-size:14.5px;line-height:1.6">
+              <strong style="color:var(--navy)">JavaScript est désactivé sur votre navigateur.</strong>
+              Ce formulaire ne peut pas être envoyé. Appelez-nous directement au
+              <a href="tel:+33622229648" style="color:var(--red);font-weight:700;white-space:nowrap">06 22 22 96 48</a>,
+              nous prenons votre demande par téléphone.
+            </div>
+          </noscript>
           <button type="submit" class="btn btn-red submit">
             Recevoir mon devis gratuit →
           </button>
@@ -1710,6 +1722,11 @@ var form = document.getElementById('quoteForm');
 if (form){
   // ===== Anti-robots INVISIBLE (zéro friction) =====
   // Le vrai rempart est le honeypot _honey, vérifié côté SERVEUR par FormSubmit.
+  // Il part rempli dans le HTML et n'est vidé qu'ici : seuls les navigateurs qui
+  // exécutent ce script peuvent envoyer le formulaire. Les robots qui postent
+  // directement sur l'URL FormSubmit gardent la valeur et sont rejetés au serveur.
+  var honeyField = form.querySelector('[name="_honey"]');
+  if (honeyField) honeyField.value = '';
   // On y ajoute deux contrôles côté client : délai minimal + preuve d'interaction.
   var formLoadedAt = Date.now();
   var userInteracted = false;
